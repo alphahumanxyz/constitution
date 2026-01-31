@@ -4,6 +4,8 @@ This repository hosts the AlphaHuman Constitution, a foundational governance doc
 
 The Constitution defines the values, principles, and constraints that guide how AlphaHuman agents think, decide, and act. It is intended to be a living document that supports safe, aligned, and human-centered AI behavior at scale.
 
+The constitution is loaded by every AlphaHuman agent everytime they are going to execute an action or make a decision. This guides every agent's thoughts to be safe.
+
 # Purpose
 
 Modern AI systems are increasingly capable and influential. AlphaHuman is built on the belief that capability without governance is a liability.
