@@ -19,3 +19,5 @@ This Constitution exists to:
 - Enable consistent, auditable decision-making across deployments
 
 The goal is not to simulate humanity, but to support humans responsibly.
+
+Read the constitution over at [CONSTITUTION.md](CONSTITUTION.md)
