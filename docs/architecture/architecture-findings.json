@@ -1,0 +1,41 @@
+{
+  "repo": "constitution",
+  "date": "2026-05-12",
+  "dirty_state": "pre-existing untracked .gitignore observed",
+  "candidate_count": 3,
+  "candidates": [
+    {
+      "id": "constitution-1",
+      "title": "Define a Policy Rule module behind the Constitution prose",
+      "files": ["CONSTITUTION.md", "README.md"],
+      "problem": "The Constitution is a strong narrative document, but its Interface to an agent runtime is a long prose Implementation. Callers must interpret priorities, refusals, privacy, and amendments without stable rule identifiers.",
+      "solution": "Add a policy-rule appendix or companion JSON/YAML with stable rule IDs, severity, scope, and response expectations while keeping CONSTITUTION.md as the human-facing source.",
+      "benefits": "Locality improves for policy changes. Leverage improves because prompts, evals, and review tooling can cite exact rules.",
+      "test_impact": "Simple lint can verify every rule has an ID and every refusal category maps to a rule.",
+      "risk": "Medium: avoid oversimplifying ethical principles into brittle checkboxes.",
+      "suggested_validation": "manual docs review plus markdown link/rule-id lint"
+    },
+    {
+      "id": "constitution-2",
+      "title": "Add an Amendment Decision Record seam",
+      "files": ["CONSTITUTION.md", "README.md"],
+      "problem": "The document says amendments must be reviewed, but the review Interface is not defined. Future agents can edit core principles without durable rationale.",
+      "solution": "Introduce lightweight amendment records under docs/adr or docs/amendments with date, changed rules, rationale, expected behavior change, and rollback concern.",
+      "benefits": "Locality for governance history and Leverage for future architecture/policy reviews.",
+      "test_impact": "Docs checks can require an amendment record when rule text changes.",
+      "risk": "Low.",
+      "suggested_validation": "manual docs review"
+    },
+    {
+      "id": "constitution-3",
+      "title": "Create an Agent Runtime Loading contract",
+      "files": ["README.md", "CONSTITUTION.md"],
+      "problem": "README claims the constitution is loaded by every AlphaHuman agent before decisions, but no Interface specifies how loading is verified, versioned, or audited.",
+      "solution": "Add a runtime loading contract with version, expected prompt position, checksum, audit evidence, and failure behavior.",
+      "benefits": "Locality for runtime integration assumptions and Leverage for deployment checks.",
+      "test_impact": "Runtime tests can assert the checksum/version is present in agent boot artifacts.",
+      "risk": "Low/medium: depends on owning agent repos.",
+      "suggested_validation": "manual docs review"
+    }
+  ]
+}
