@@ -16,8 +16,8 @@ for path in "${required_files[@]}"; do
   fi
 done
 
-grep -q "^# " README.md
-grep -q "^# " CONSTITUTION.md
+head -n1 README.md | grep -q "^# "
+head -n1 CONSTITUTION.md | grep -q "^# "
 grep -q "safe" README.md
 
 echo "constitution check ok"
