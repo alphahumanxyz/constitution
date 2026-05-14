@@ -23,3 +23,16 @@ This Constitution exists to:
 The goal is not to simulate humanity, but to support humans responsibly.
 
 Read the constitution over at [CONSTITUTION.md](CONSTITUTION.md)
+
+## Local validation
+
+Before handing off a pull request, run:
+
+```bash
+./scripts/check.sh
+```
+
+This command validates the executable structure of `CONSTITUTION.md`, including
+the required governance sections, consecutive principles 1 through 20, and the
+closing statement. It also runs `git diff --check` so whitespace errors fail
+the same local gate.
