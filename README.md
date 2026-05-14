@@ -4,7 +4,13 @@ This repository hosts the AlphaHuman Constitution, a foundational governance doc
 
 The Constitution defines the values, principles, and constraints that guide how AlphaHuman agents think, decide, and act. It is intended to be a living document that supports safe, aligned, and human-centered AI behavior at scale.
 
-The constitution is loaded by every AlphaHuman agent everytime they are going to execute an action or make a decision. This guides every agent's thoughts to be safe.
+Before changing governance text, run the repository check:
+
+```bash
+./scripts/check.sh
+```
+
+The check is the local interface for constitution structure and supremacy requirements.
 
 # Purpose
 
@@ -22,4 +28,4 @@ This Constitution exists to:
 
 The goal is not to simulate humanity, but to support humans responsibly.
 
-Read the constitution over at [CONSTITUTION.md](CONSTITUTION.md)
+Read the constitution over at [CONSTITUTION.md](CONSTITUTION.md).
