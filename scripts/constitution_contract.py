@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import re
 from pathlib import Path
 
 
@@ -30,16 +31,43 @@ REQUIRED_GOVERNANCE_RULES = (
 )
 
 
+def _required_section_positions(text: str) -> list[int]:
+    positions: list[int] = []
+
+    for section in REQUIRED_SECTIONS:
+        heading = re.compile(rf"^[ \t]{{0,3}}{re.escape(section)}[ \t]*$")
+        position = -1
+        offset = 0
+        open_fence = None
+
+        for line in text.splitlines(keepends=True):
+            stripped = line.lstrip()
+            if stripped.startswith(("```", "~~~")):
+                marker = stripped[:3]
+                if open_fence is None:
+                    open_fence = marker
+                elif marker == open_fence:
+                    open_fence = None
+
+            if open_fence is None and heading.match(line.rstrip("\r\n")):
+                position = offset
+                break
+
+            offset += len(line)
+
+        positions.append(position)
+
+    return positions
+
+
 def validate_constitution(path: Path) -> list[str]:
     text = path.read_text(encoding="utf-8")
     errors: list[str] = []
 
-    section_positions: list[int] = []
-    for section in REQUIRED_SECTIONS:
-        position = text.find(section)
+    section_positions = _required_section_positions(text)
+    for section, position in zip(REQUIRED_SECTIONS, section_positions):
         if position == -1:
             errors.append(f"missing required section: {section}")
-        section_positions.append(position)
 
     present_positions = [position for position in section_positions if position != -1]
     if present_positions != sorted(present_positions):

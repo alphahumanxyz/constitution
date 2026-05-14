@@ -81,6 +81,28 @@ class ConstitutionContractTests(unittest.TestCase):
 
         self.assertIn("required sections are not in contract order", errors)
 
+    def test_required_sections_must_be_markdown_headings(self):
+        errors = self.validate_text(
+            VALID_CONSTITUTION.replace(
+                "## Preamble",
+                "This paragraph mentions ## Preamble but is not a heading.",
+                1,
+            )
+        )
+
+        self.assertIn("missing required section: ## Preamble", errors)
+
+    def test_required_sections_ignore_fenced_code_blocks(self):
+        errors = self.validate_text(
+            VALID_CONSTITUTION.replace(
+                "## Preamble",
+                "```\n## Preamble\n```",
+                1,
+            )
+        )
+
+        self.assertIn("missing required section: ## Preamble", errors)
+
 
 if __name__ == "__main__":
     unittest.main()
