@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>PR 1 Validation Handoff - 2026-05-13</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 2rem; line-height: 1.45; max-width: 860px; }
+      h1, h2 { line-height: 1.15; }
+      code { background: #f3f4f6; padding: 0.1rem 0.25rem; border-radius: 4px; }
+      .status { border-left: 4px solid #6b7280; padding-left: 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>PR 1 Validation Handoff - 2026-05-13</h1>
+    <section class="status">
+      <p><strong>Repository:</strong> tinyhumansai/constitution</p>
+      <p><strong>PR:</strong> <a href="https://github.com/tinyhumansai/constitution/pull/1">#1 Add constitution validation contract artifacts</a></p>
+      <p><strong>Branch:</strong> jwalin-shah:codex/constitution-validation-contract</p>
+      <p><strong>State inspected:</strong> open. GitHub reports mergeable and CodeRabbit success, with review decision still showing stale changes requested from the earlier review.</p>
+    </section>
+    <h2>Review State</h2>
+    <p>CodeRabbit requested that <code>scripts/check.sh</code> validate only the first line of <code>README.md</code> and <code>CONSTITUTION.md</code> for top-level headings. This handoff branch applies that validation-scope fix, and the later CodeRabbit status context is green.</p>
+    <h2>Validation Evidence</h2>
+    <ul>
+      <li><code>./scripts/check.sh</code>: passed with <code>constitution check ok</code>.</li>
+      <li><code>git diff --check</code>: passed.</li>
+      <li><code>python3 -m html.parser docs/status/pr-1-validation-handoff-2026-05-13.html</code>: passed.</li>
+      <li><code>rtk grep "safe" README.md</code>: found existing README matches for the validation invariant.</li>
+    </ul>
+    <h2>Secondary Review</h2>
+    <p>Gemini CLI was available. The bounded diff review returned <code>approve-with-nits</code> with no blocking findings. The only low-severity note was that the <code>README.md</code> <code>safe</code> check depends on existing README content; that invariant was confirmed locally.</p>
+    <h2>Permission Evidence</h2>
+    <p>Earlier merge attempt for PR #1 failed with GitHub GraphQL permission error: <code>jwalin-shah does not have the correct permissions to execute MergePullRequest</code>. A maintainer with merge rights still needs to perform the final merge if the PR is accepted.</p>
+  </body>
+</html>
