@@ -53,6 +53,20 @@ class ConstitutionParserTests(unittest.TestCase):
 
         self.assertEqual("# The Constitution", constitution.title)
         self.assertEqual(20, len(constitution.principles))
+        self.assertEqual(
+            (
+                "Preamble",
+                "I. Core Values",
+                "II. Alignment and Decision-Making Principles",
+                "III. Boundaries and Refusals",
+                "IV. Privacy and Data Responsibility",
+                "V. Agency and Power Use",
+                "VI. Continuous Improvement and Humility",
+                "VII. Meta-Governance",
+                "Closing Statement",
+            ),
+            constitution.sections,
+        )
         self.assertEqual("Closing Statement", constitution.sections[-1])
 
     def test_duplicate_principle_number_is_rejected(self) -> None:
@@ -75,7 +89,26 @@ class ConstitutionParserTests(unittest.TestCase):
 
         with self.assertRaisesRegex(
             ConstitutionParseError,
-            "missing required section: Closing Statement",
+            "sections must match the required constitution outline",
+        ):
+            parse_constitution(malformed)
+
+    def test_missing_required_outline_sections_are_rejected(self) -> None:
+        malformed = textwrap.dedent(VALID_CONSTITUTION).strip()
+        for section in (
+            "\n## I. Core Values",
+            "\n## II. Alignment and Decision-Making Principles",
+            "\n## III. Boundaries and Refusals",
+            "\n## IV. Privacy and Data Responsibility",
+            "\n## V. Agency and Power Use",
+            "\n## VI. Continuous Improvement and Humility",
+            "\n## VII. Meta-Governance",
+        ):
+            malformed = malformed.replace(section, "")
+
+        with self.assertRaisesRegex(
+            ConstitutionParseError,
+            "sections must match the required constitution outline",
         ):
             parse_constitution(malformed)
 

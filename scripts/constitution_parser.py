@@ -13,6 +13,17 @@ from pathlib import Path
 SECTION_RE = re.compile(r"^## (?P<title>(?:[IVX]+\. .+|Preamble|Closing Statement))$")
 PRINCIPLE_RE = re.compile(r"^### (?P<number>\d+)\. (?P<title>.+)$")
 EXPECTED_PRINCIPLES = tuple(range(1, 21))
+EXPECTED_SECTIONS = (
+    "Preamble",
+    "I. Core Values",
+    "II. Alignment and Decision-Making Principles",
+    "III. Boundaries and Refusals",
+    "IV. Privacy and Data Responsibility",
+    "V. Agency and Power Use",
+    "VI. Continuous Improvement and Humility",
+    "VII. Meta-Governance",
+    "Closing Statement",
+)
 
 
 class ConstitutionParseError(ValueError):
@@ -71,8 +82,11 @@ def parse_constitution(text: str) -> Constitution:
             f"found {list(found_numbers)}"
         )
 
-    if "Closing Statement" not in sections:
-        raise ConstitutionParseError("missing required section: Closing Statement")
+    if tuple(sections) != EXPECTED_SECTIONS:
+        raise ConstitutionParseError(
+            "sections must match the required constitution outline; "
+            f"found {sections}"
+        )
 
     return Constitution(
         title=lines[0],
