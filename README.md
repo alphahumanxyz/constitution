@@ -23,3 +23,10 @@ This Constitution exists to:
 The goal is not to simulate humanity, but to support humans responsibly.
 
 Read the constitution over at [CONSTITUTION.md](CONSTITUTION.md)
+
+# Fixtures and Runtime Outputs
+
+Validation scripts should write generated evidence, logs, and caches under the ignored
+`.local/constitution/` runtime directory. Tracked fixtures are reserved for small,
+deterministic review artifacts. See [docs/fixtures.md](docs/fixtures.md) and
+[scripts/runtime_paths.sh](scripts/runtime_paths.sh) for the default paths.
